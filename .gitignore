@@ -1,0 +1,5 @@
+/venv
+/mysql
+/wordpress
+**/**/.env*
+**/**/__pycache__
