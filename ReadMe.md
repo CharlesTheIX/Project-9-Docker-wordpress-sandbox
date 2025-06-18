@@ -22,6 +22,7 @@
 - **Do not move the location of the `scripts` directory, unless you update the `Dockerfile` in accordance with the file structure change.**
 - **It may or may not be the case that the user will need to change the mode of the following `Python` files so that they are executable: `convert_image_to_webp.py`, `delete_object_from_s3_bucket.py`, and `upload_file_to_s3_bucket.py`.**
 - **The bucket name is set within the [python-functions.php](./php/python-functions.php) file, however it is recommended to set this value in a custom `ACF` field within an options page or within the machines environment variables. The code will need to be updated to reflect this.**
+- **The locations for the paths the the `Python` scripts are set within the [python-functions.php](./php/python-functions.php) file, however it is recommended to set these values in a custom `ACF` field within an options page or within the machines environment variables. The code will need to be updated to reflect this.**
 
 ## Introduction
 
