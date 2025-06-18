@@ -8,7 +8,7 @@ $S3_META_TAG_EDITS_WEBP = "hyve_s3_url_edits_webp";
 $S3_META_TAG_ORIGINAL_WEBP = "hyve_s3_url_original_webp";
 $PYTHON_S3_UPLOAD_SCRIPT_PATH = "/opt/scripts/python/s3/upload_file_to_s3_bucket.py";
 
-function python_upload_file_to_s3_bucket($post_id, $update_type, $convert_to_webp, $file_name = null) { 
+function python_upload_file_to_s3_bucket($post_id, $update_type, $convert_to_webp = false, $file_name = null) { 
   if ($convert_to_webp) python_convert_and_save_image_to_webp($post_id, $update_type, $file_name);
 
   global $BUCKET_NAME;

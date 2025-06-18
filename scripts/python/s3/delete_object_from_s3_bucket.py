@@ -1,10 +1,16 @@
 #!/usr/bin/env python
 
+import os
+import sys
 import argparse
 from pathlib import Path
+from datetime import datetime
 from dotenv import load_dotenv
-from get_s3_client import get_s3_client
 from botocore.exceptions import ClientError
+
+sys.path.append(str(Path(__file__).resolve().parents[1]))
+from s3.get_s3_client import get_s3_client;
+from logger.log_content_to_file import log_content_to_file
 
 env_path = Path(__file__).resolve().parents[2] / ".env"
 load_dotenv(dotenv_path=env_path)
@@ -17,26 +23,35 @@ def delete_file_from_s3_bucket(bucket_name, s3_key):
     :param s3_key: S3 object name
 
     :return: True if file was deleted, else False
-    """
+    """ 
+    
+    log_file_name = os.getenv("LOG_FILE_NAME")
+    error_log_file_name = os.getenv("ERROR_LOG_FILE_NAME")
+    log_file_directory_path = os.getenv("LOG_FILE_DIR_PATH")
+    log_content_to_file(log_file_directory_path, log_file_name, datetime.now().strftime("%d-%m-%Y_%H-%M-%S"))
+    log_content_to_file(
+        log_file_directory_path,
+        log_file_name,
+        f"Preparing to delete: {s3_key} from s3://{bucket_name}/{s3_key}"
+    )
 
     if not bucket_name:
-        print("ERROR: Bucket name is required.")
+        log_content_to_file(log_file_directory_path, error_log_file_name, "ERROR: Bucket name is required.")
         return False
 
     if not s3_key:
-        print("ERROR: S3 key is required.")
+        log_content_to_file(log_file_directory_path, error_log_file_name, "ERROR: S3 key is required.")
         return False
 
     s3_client = get_s3_client()
-
-    print(f"\nDeleting s3://{bucket_name}/{s3_key}...")
+    log_content_to_file(log_file_directory_path, log_file_name, f"Deleting s3://{bucket_name}/{s3_key}...")
 
     try:
         s3_client.delete_object(Bucket=bucket_name, Key=s3_key)
-        print("File deleted successfully.")
+        log_content_to_file(log_file_directory_path, log_file_name, "File deleted successfully.\n")
         return True
     except ClientError as e:
-        print(f"ERROR: Failed to delete file: {e}")
+        log_content_to_file(log_file_directory_path, error_log_file_name, f"ERROR: Failed to delete file: {e}\n")
         return False
 
 if __name__ == "__main__":

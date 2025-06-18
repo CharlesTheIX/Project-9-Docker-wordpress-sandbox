@@ -13,7 +13,6 @@ from s3.get_s3_client import get_s3_client;
 from s3.ProgressPercentage import ProgressPercentage
 from logger.log_content_to_file import log_content_to_file
 
-
 env_path = Path(__file__).resolve().parents[2] / ".env"
 load_dotenv(dotenv_path=env_path)
 
@@ -59,14 +58,15 @@ def upload_file_to_s3_bucket(file_path, bucket_name, s3_key=None):
             Callback=ProgressPercentage(file_path),
         )
     except ClientError as e:
-        log_content_to_file(log_file_directory_path, error_log_file_name, f"ERROR: Upload failed: {file_path} -> {e}")
+        log_content_to_file(log_file_directory_path, error_log_file_name, f"ERROR: Upload failed: {file_path} -> {e}\n")
         return False
     
     try:
         s3_client.head_object(Bucket=bucket_name, Key=s3_key)
+        log_content_to_file(log_file_directory_path, log_file_name, f"{s3_key} successfully uploaded to {bucket_name}.\n")
         return True
     except ClientError:
-        log_content_to_file(log_file_directory_path, error_log_file_name, f"ERROR: Upload reported success but object not found in S3: {s3_key}")
+        log_content_to_file(log_file_directory_path, error_log_file_name, f"ERROR: Upload reported success but object not found in S3: {s3_key}\n")
         return False
 
 if __name__ == "__main__":
