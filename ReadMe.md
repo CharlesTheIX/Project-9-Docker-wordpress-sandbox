@@ -15,18 +15,18 @@
   - [Deleting media items](#deleting-media-items)
 - [Development](#development)
 
-## Notes
+## ✅ Notes
 
-- **This document goes through the set up of `WordPress` and `Python` within the `Docker` environment.**
-- **If you just want to integrate the `Python` scripts with `PHP` then [skip to here](#integrating-python-and-scripts-into-existing-wordpress-installation).**
-- **Do not move the location of the `scripts` directory, unless you update the `Dockerfile` in accordance with the file structure change.**
-- **It may or may not be the case that the user will need to change the mode of the following `Python` files so that they are executable: `convert_image_to_webp.py`, `delete_object_from_s3_bucket.py`, and `upload_file_to_s3_bucket.py`.**
-- **The bucket name is set within the [python-functions.php](./php/python-functions.php) file, however it is recommended to set this value in a custom `ACF` field within an options page or within the machines environment variables. The code will need to be updated to reflect this.**
-- **The locations for the paths the the `Python` scripts are set within the [python-functions.php](./php/python-functions.php) file, however it is recommended to set these values in a custom `ACF` field within an options page or within the machines environment variables. The code will need to be updated to reflect this.**
+- ⚠️ **This document goes through the set up of `WordPress` and `Python` within the `Docker` environment.**
+- ⚠️ **If you just want to integrate the `Python` scripts with `PHP` then [skip to here](#integrating-python-and-scripts-into-existing-wordpress-installation).**
+- ⚠️ **Do not move the location of the `scripts` directory, unless you update the `Dockerfile` in accordance with the file structure change.**
+- ⚠️ **It may or may not be the case that the user will need to change the mode of the following `Python` files so that they are executable: `convert_image_to_webp.py`, `delete_object_from_s3_bucket.py`, and `upload_file_to_s3_bucket.py`.**
+- ⚠️ **The bucket name is set within the [python-functions.php](./php/python-functions.php) file, however it is recommended to set this value in a custom `ACF` field within an options page or within the machines environment variables. The code will need to be updated to reflect this.**
+- ⚠️ **The locations for the paths the the `Python` scripts are set within the [python-functions.php](./php/python-functions.php) file, however it is recommended to set these values in a custom `ACF` field within an options page or within the machines environment variables. The code will need to be updated to reflect this.**
 
-## Introduction
+## 📘 Introduction
 
-This document will review how to set up a `WordPress` and `MySQL` orchestration with `Python` integrated so that automation scripts can be run.
+This document explains how to set up a `WordPress` and `MySQL` orchestration with `Python` integrated so that automation scripts can be run.
 
 In this example, `PHP` is used to hook into the native `WordPress` hooks and actions and run `Python` scripts to sync the media library with an external `Cloudflare R2 (S3) bucket`.
 
@@ -36,19 +36,19 @@ Additionally, there is an option to convert images to webp via the `Pillow` depe
 
 Finally, this documentation assumes the user has some understanding of the technologies used for this example: `PHP`, `Python`, `Docker`, `WordPress` and `S3`.
 
-## Overview
+## 🧭 Overview
 
 Within the root of this project you will find a [Dockerfile](./Dockerfile) and a [docker-compose.yml](./docker-compose.yml) file.
 
 The `docker-compose.yml` file is used to manage the orchestration of `MySQL` and `WordPress` containers.
 
-The `MySQL` container is built from a default image (`mysql:5.7`), however the `WordPress` image has been customised to install `python3` (the latest version of the Python programming language), `python-venv` (allows Python to run within it's own virtual environment so that it does not conflict with system Python operations), and `pip` (a package manager for Python).
+The `MySQL` container is built from a default image (`mysql:5.7`), however the `WordPress` image has been customised to install `python3` (the latest version of the Python programming language), `python-venv` (allows Python to run within its own virtual environment so that it does not conflict with system Python operations), and `pip` (a package manager for Python).
 
 After the installation of the `Python` on the machine, the [requirements.txt](./scripts/python/requirements.txt) is copied over and used to install the `Python` specific dependencies, and then all scripts are copied over to the `opt` directory within the machine.
 
-The `opt` directory has been chosen here due to the `docker-compose.yml` configuration overwriting the `var/www/html/` directory and it seemed an appropriate directory due to this directory also containing the `pip` binaries.
+The `opt` directory has been chosen here due to the `docker-compose.yml` configuration overwriting the `var/www/html/` directory and it is appropriate as it typically contains Python-related binaries and avoids conflicts with WordPress application files.
 
-## Requirements
+## ⚙️ Requirements
 
 To use the `Docker` files locally you will need to have `Docker Desktop` installed on your machine ([see here for more info](https://www.docker.com/products/docker-desktop/)).
 
@@ -58,7 +58,7 @@ For testing the scripts locally you will need to have `Python` and `pip` install
 
 This documentation assumes the user understands how to set up, install dependencies, and run `Python` scripts locally.
 
-## Launching the orchestration
+## 🚀 Launching the orchestration
 
 This walk through assumes that you are running this docker environment on your local machine, or in a container environment using a provider such as `AWS ECS and ECR`.
 
@@ -72,7 +72,7 @@ Additionally, the `.env.example` has pre-configured variables for the python log
   cd path/to/dir/
 ```
 
-3. Run the appropriate `Docker command` to 'stand up' you `Docker orchestration`. This will download (pull) the required base images, and create the required volumes (directories) within the project. If errors are encountered, it is suggested you use an AI agent (eg.`ChatGPT`) to assist.
+3. Run the appropriate `Docker command` to 'stand up' the `Docker orchestration`. This will download (pull) the required base images, and create the required volumes (directories) within the project. If errors occur, consult the Docker logs and documentation, or seek assistance via developer forums or tools like `ChatGPT`.
 
 ```bash
   docker compose up --build
@@ -102,7 +102,7 @@ Additionally, the `.env.example` has pre-configured variables for the python log
 
 8. The set up should now be complete.
 
-## Integrating Python and scripts into existing Wordpress installation
+## 🧩 Integrating Python and scripts into existing Wordpress installation
 
 This walk through assumes you have an active machine that hosts `WordPress` and that the user has admin privileges.
 
@@ -128,7 +128,7 @@ This walk through assumes you have an active machine that hosts `WordPress` and 
 
 8. The set up should now be complete.
 
-## How the scripts work
+## 🛠 How the scripts work
 
 There are a number of `PHP` scripts that fire on specific `WordPress` events.
 
@@ -136,7 +136,7 @@ Below is a brief description of how each process is expected to work - for great
 
 ### Uploading new media items
 
-When uploading a new media items from the `Media Library` page within `WordPress`, the `handle_media_creation` function within the [python-actions.php](./php/python-actions.php) file is fired, triggering the `python_upload_file_to_s3_bucket` function within the [python-functions.php](./php/python-functions.php) file.
+When uploading a new media item from the `Media Library` page within `WordPress`, the `handle_media_creation` function within the [python-actions.php](./php/python-actions.php) file is fired, triggering the `python_upload_file_to_s3_bucket` function within the [python-functions.php](./php/python-functions.php) file.
 
 The `python_upload_file_to_s3_bucket` function takes four parameters: the `post_id` (the attachment id); the `update_type` (this is 'original' or 'edit' but for new media it is set to 'original'); a boolean flag `convert_to_webp` (optional: default = false); and the file_name (optional: default = null), that is only used if the `update_type` is set to 'edit'.
 
@@ -178,6 +178,6 @@ Once this function is fired, it will connect to the `S3` client and delete all t
 
 Finally, if the user refreshes the page an admin notification will appear at the top of the page stating if the python function ran successfully or errored - the output can also be viewed in the log files.
 
-## Development
+## 🧪 Development
 
 If updating this repository please keep track of the changes and update this `ReadMe.md` file, the `.env.example` and any other relative files so that documentation can be kept up-to-date for future developers.
