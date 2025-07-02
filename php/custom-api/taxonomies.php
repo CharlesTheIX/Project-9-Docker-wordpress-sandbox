@@ -2,7 +2,7 @@
 if (!defined('ABSPATH')) exit;
 
 add_action('rest_api_init', function () {
-  register_rest_route('hyve/v1', '/taxonomies', [
+  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/taxonomies', [
     'methods'             => 'POST',
     'callback'            => 'hyve_get_taxonomies',
     'permission_callback' => 'hyve_check_basic_auth',
@@ -67,7 +67,7 @@ function hyve_get_taxonomies(WP_REST_Request $request) {
 }
 
 add_action('rest_api_init', function () {
-  register_rest_route('hyve/v1', '/taxonomies/by-slug-id', [
+  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/taxonomies/by-slug-id', [
     'methods'             => 'POST',
     'permission_callback' => 'hyve_check_basic_auth',
     'callback'            => 'hyve_get_taxonomy_by_slug_id',
@@ -122,7 +122,7 @@ function hyve_get_taxonomy_by_slug_id(WP_REST_Request $request) {
 }
 
 add_action('rest_api_init', function () {
-  register_rest_route('hyve/v1', '/taxonomy-types', [
+  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/taxonomy-types', [
     'methods'             => 'POST',
     'permission_callback' => 'hyve_check_basic_auth',
     'callback'            => 'hyve_get_taxonomy_types',

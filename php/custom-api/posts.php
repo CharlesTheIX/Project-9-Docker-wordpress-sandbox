@@ -2,7 +2,7 @@
 if (!defined('ABSPATH')) exit;
 
 add_action('rest_api_init', function () {
-  register_rest_route('hyve/v1', '/posts', [
+  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/posts', [
     'methods'             => 'POST',
     'callback'            => 'hyve_get_posts',
     'permission_callback' => 'hyve_check_basic_auth',
@@ -88,7 +88,7 @@ function hyve_get_posts(WP_REST_Request $request) {
 }
 
 add_action('rest_api_init', function () {
-  register_rest_route('hyve/v1', '/posts/by-slug-id', [
+  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/posts/by-slug-id', [
     'methods'             => 'POST',
     'permission_callback' => 'hyve_check_basic_auth',
     'callback'            => 'hyve_get_post_by_slug_id',
@@ -146,7 +146,7 @@ function hyve_get_post_by_slug_id(WP_REST_Request $request) {
 }
 
 add_action('rest_api_init', function () {
-  register_rest_route('hyve/v1', '/post-types', [
+  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/post-types', [
     'methods'             => 'POST',
     'callback'            => 'hyve_get_post_types',
     'permission_callback' => 'hyve_check_basic_auth',

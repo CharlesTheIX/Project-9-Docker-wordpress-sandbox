@@ -2,7 +2,7 @@
 if (!defined('ABSPATH')) exit;
 
 add_action('rest_api_init', function () {
-  register_rest_route('hyve/v1', '/menus', [
+  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/menus', [
     'methods' => 'POST',
     'callback' => 'hyve_get_menus',
     'permission_callback' => 'hyve_check_basic_auth',
@@ -27,7 +27,7 @@ function hyve_get_menus(WP_REST_Request $request) {
 }
 
 add_action('rest_api_init', function () {
-  register_rest_route('hyve/v1', '/menus/by-type', [
+  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/menus/by-type', [
     'methods' => 'POST',
     'callback' => 'hyve_get_menu',
     'permission_callback' => 'hyve_check_basic_auth',

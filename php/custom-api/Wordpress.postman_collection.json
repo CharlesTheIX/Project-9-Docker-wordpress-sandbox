@@ -36,12 +36,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/attachments",
+					"raw": "{{base_url}}/{{namespace}}/v1/attachments",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"attachments"
 					]
@@ -79,12 +79,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/attachments/by-slug-id",
+					"raw": "{{base_url}}/{{namespace}}/v1/attachments/by-slug-id",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"attachments",
 						"by-slug-id"
@@ -114,12 +114,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/health",
+					"raw": "{{base_url}}/{{namespace}}/v1/health",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"health"
 					]
@@ -157,12 +157,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/menus",
+					"raw": "{{base_url}}/{{namespace}}/v1/menus",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"menus"
 					]
@@ -200,12 +200,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/menus/by-type",
+					"raw": "{{base_url}}/{{namespace}}/v1/menus/by-type",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"menus",
 						"by-type"
@@ -244,12 +244,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/pages",
+					"raw": "{{base_url}}/{{namespace}}/v1/pages",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"pages"
 					]
@@ -287,12 +287,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/pages/by-slug-id",
+					"raw": "{{base_url}}/{{namespace}}/v1/pages/by-slug-id",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"pages",
 						"by-slug-id"
@@ -331,12 +331,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/post-types",
+					"raw": "{{base_url}}/{{namespace}}/v1/post-types",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"post-types"
 					]
@@ -374,12 +374,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/posts",
+					"raw": "{{base_url}}/{{namespace}}/v1/posts",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"posts"
 					]
@@ -417,12 +417,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/posts/by-slug-id",
+					"raw": "{{base_url}}/{{namespace}}/v1/posts/by-slug-id",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"posts",
 						"by-slug-id"
@@ -461,12 +461,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/taxonomies",
+					"raw": "{{base_url}}/{{namespace}}/v1/taxonomies",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"taxonomies"
 					]
@@ -504,12 +504,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/taxonomies/by-slug-id",
+					"raw": "{{base_url}}/{{namespace}}/v1/taxonomies/by-slug-id",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"taxonomies",
 						"by-slug-id"
@@ -548,12 +548,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/hyve/v1/taxonomy-types",
+					"raw": "{{base_url}}/{{namespace}}/v1/taxonomy-types",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"hyve",
+						"{{namespace}}",
 						"v1",
 						"taxonomy-types"
 					]

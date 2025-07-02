@@ -1,4 +1,6 @@
 <?php
+if (!defined('CUSTOM_API_NAMESPACE')) define('CUSTOM_API_NAMESPACE', 'hyve');
+
 function api_response($error, $status, $message, $data = null, $meta = null) {
   return new WP_REST_Response([
     'meta'    => $meta,
@@ -68,7 +70,7 @@ add_filter('rest_authentication_errors', function ($result) {
   if (!empty($result)) return $result;
 
   $request_uri = $_SERVER['REQUEST_URI'] ?? '';
-  if (strpos($request_uri, '/wp-json/hyve/v1/') === 0) {
+  if (strpos($request_uri, '/wp-json/' . CUSTOM_API_NAMESPACE . '/v1/') === 0) {
     return new WP_Error('rest_forbidden', 'Unauthorized access', ['status' => 401]);
   }
 
@@ -77,7 +79,7 @@ add_filter('rest_authentication_errors', function ($result) {
 
 add_filter('rest_pre_serve_request', function ($served, $result, $request, $server) {
   if ($result instanceof WP_REST_Response && $result->get_status() === 401) {
-    if (strpos($request->get_route(), '/hyve/v1/') === 0) {
+    if (strpos($request->get_route(), '/'. CUSTOM_API_NAMESPACE . '/v1/') === 0) {
       $custom = [
         'data'    => null,
         'status'  => 401,

@@ -2,7 +2,7 @@
 if (!defined('ABSPATH')) exit;
 
 add_action('rest_api_init', function () {
-  register_rest_route('hyve/v1', '/health', [
+  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/health', [
     'methods' => 'GET',
     'callback' => 'hyve_health',
     'permission_callback' => 'hyve_check_basic_auth',
