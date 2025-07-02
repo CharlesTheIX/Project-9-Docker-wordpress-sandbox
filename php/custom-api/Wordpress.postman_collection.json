@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "ff5c237f-ef44-46f3-b0d3-fc033d27c619",
+		"name": "Wordpress",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39609913"
+	},
+	"item": [
+		{
+			"name": "Attachments",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"page\": 1,\n    \"search\": \"\",\n    \"fields\": [],\n    \"per_page\": 100,\n    \"order\": \"DESC\",\n    \"status\": \"inherit\",\n    \"categories\": [],\n    \"order_by\": \"date\"\n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/attachments",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"attachments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attachments By Slug or ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 13,\n    // \"slug\": \"pokemon-primape\",\n    \"fields\": []\n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/attachments/by-slug-id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"attachments",
+						"by-slug-id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Menus",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/menus",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"menus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Menus By Type",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fields\": [\"url\"],\n    \"menu_type\": \"custom_menu\"\n}   ß",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/menus/by-type",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"menus",
+						"by-type"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pages",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"page\": 1,\n    \"search\": \"\",\n    \"fields\": [],\n    \"per_page\": 100,\n    \"order\": \"DESC\",\n    \"status\": \"publish\",\n    \"categories\": [],\n    \"order_by\": \"date\"\n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/pages",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"pages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pages By Slug or ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 2,\n    // \"slug\": \"sample-page\",\n    \"fields\": []\n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/pages/by-slug-id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"pages",
+						"by-slug-id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Types",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fields\": [\"name\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/post-types",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"post-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"page\": 1,\n    \"search\": \"\",\n    \"fields\": [],\n    \"per_page\": 100,\n    \"order\": \"DESC\",\n    \"post_type\": \"post\",\n    \"status\": \"publish\",\n    \"categories\": [],\n    \"order_by\": \"date\"\n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/posts",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posts By Slug or ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 10,\n    // \"slug\": \"my-post\",\n    \"fields\": [],\n    \"post_type\": \"case\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/posts/by-slug-id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"posts",
+						"by-slug-id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Taxonomies",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    // \"parent\": 0,\n    \"search\": \"\",\n    \"fields\": [],\n    \"order\": \"ASC\",\n    \"taxonomy\": \"category\",\n    \"order_by\": \"name\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/taxonomies",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"taxonomies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Taxonomies By Slug or ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    // \"id\": 1,\n    \"slug\": \"uncategorised\",\n    \"fields\": [],\n    \"taxonomy\": \"category\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/taxonomies/by-slug-id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"taxonomies",
+						"by-slug-id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Taxonomy Types",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fields\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hyve/v1/taxonomy-types",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hyve",
+						"v1",
+						"taxonomy-types"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,19 +1,17 @@
 # Dockerised WordPress orchestration with Python integration
 
-## Contents
-
-- [Notes](#notes)
-- [Introduction](#introduction)
-- [Overview](#overview)
-- [Requirements](#requirements)
-- [Launching the orchestration](#launching-the-orchestration)
-- [Integrating Python and scripts into existing Wordpress installation](#integrating-python-and-scripts-into-existing-wordpress-installation)
-- [How the scripts work](#how-the-scripts-work)
+- [Notes](#✅-notes)
+- [Introduction](#📘-introduction)
+- [Overview](#🧭-overview)
+- [Requirements](#⚙️-requirements)
+- [Launching the orchestration](#🚀-launching-the-orchestration)
+- [Integrating Python and scripts into existing Wordpress installation](#🧩-integrating-python-and-scripts-into-existing-wordpress-installation)
+- [How the scripts work](#🛠-how-the-scripts-work)
   - [Uploading new media items](#uploading-new-media-items)
   - [Editing media metadata](#editing-media-metadata)
   - [Editing media items](#editing-media-items)
   - [Deleting media items](#deleting-media-items)
-- [Development](#development)
+- [Development](#🧪-development)
 
 ## ✅ Notes
 
@@ -21,8 +19,8 @@
 - ⚠️ **If you just want to integrate the `Python` scripts with `PHP` then [skip to here](#integrating-python-and-scripts-into-existing-wordpress-installation).**
 - ⚠️ **Do not move the location of the `scripts` directory, unless you update the `Dockerfile` in accordance with the file structure change.**
 - ⚠️ **It may or may not be the case that the user will need to change the mode of the following `Python` files so that they are executable: `convert_image_to_webp.py`, `delete_object_from_s3_bucket.py`, and `upload_file_to_s3_bucket.py`.**
-- ⚠️ **The bucket name is set within the [python-functions.php](./php/python-functions.php) file, however it is recommended to set this value in a custom `ACF` field within an options page or within the machines environment variables. The code will need to be updated to reflect this.**
-- ⚠️ **The locations for the paths the the `Python` scripts are set within the [python-functions.php](./php/python-functions.php) file, however it is recommended to set these values in a custom `ACF` field within an options page or within the machines environment variables. The code will need to be updated to reflect this.**
+- ⚠️ **The bucket name is set within the [python-functions.php](./php/python/python-functions.php) file, however it is recommended to set this value in a custom `ACF` field within an options page or within the machines environment variables. The code will need to be updated to reflect this.**
+- ⚠️ **The locations for the paths the the `Python` scripts are set within the [python-functions.php](./php/python/python-functions.php) file, however it is recommended to set these values in a custom `ACF` field within an options page or within the machines environment variables. The code will need to be updated to reflect this.**
 
 ## 📘 Introduction
 
@@ -82,7 +80,7 @@ Additionally, the `.env.example` has pre-configured variables for the python log
 
 5. Navigate to [http://localhost:5022](http://localhost:5022), the port set within the `docker-compose.yml` file, to begin set-up of the `WordPress` installation. Follow the steps as you normally would with any new `WordPress` installation. If you wish to clean up the default set-up and install plugins etc. then that can be done now.
 
-6. Within the codebase, move the two `PHP` files [python-actions.php](./php/python-actions.php) and [python-functions.php](./php/python-functions.php) to and appropriate directory within the active `WordPress` theme - by default the active theme for this project is set to `twentytwentfive`. These files contain the code to connect with the `Python` scripts and hooks / actions for the `WordPress` events. This example assumes that the files are copied over to the root of the theme, ie the same location as the `functions.php` file. If the files have been copied to a different location then line 2 of `python-actions.php` will need to be updated to reflect the new location:
+6. Within the codebase, move the two `PHP` files [python-actions.php](./php/python/python-actions.php) and [python-functions.php](./php/python/python-functions.php) to and appropriate directory within the active `WordPress` theme - by default the active theme for this project is set to `twentytwentfive`. These files contain the code to connect with the `Python` scripts and hooks / actions for the `WordPress` events. This example assumes that the files are copied over to the root of the theme, ie the same location as the `functions.php` file. If the files have been copied to a different location then line 2 of `python-actions.php` will need to be updated to reflect the new location:
 
 ```php
   <?php
@@ -108,7 +106,7 @@ This walk through assumes you have an active machine that hosts `WordPress` and 
 
 **Be aware** that the `.env.example` file is pre-configured to store logs in the `/var/www/logs` directory, please update this if appropriate and make sure the logging directory has write permissions for `Python`.
 
-1. Within the codebase, move the two `PHP` files [python-actions.php](./php/python-actions.php) and [python-functions.php](./php/python-functions.php) to and appropriate directory within the active `WordPress` theme. These files contain the code to connect with the `Python` scripts and hooks / actions for the `WordPress` events. This example assumes that the files are copied over to the root of the theme, ie the same location as the `functions.php` file. If the files have been copied to a different location then line 2 of `python-actions.php` will need to be updated to reflect the new location:
+1. Within the codebase, move the two `PHP` files [python-actions.php](./php/python/python-actions.php) and [python-functions.php](./php/python/python-functions.php) to and appropriate directory within the active `WordPress` theme. These files contain the code to connect with the `Python` scripts and hooks / actions for the `WordPress` events. This example assumes that the files are copied over to the root of the theme, ie the same location as the `functions.php` file. If the files have been copied to a different location then line 2 of `python-actions.php` will need to be updated to reflect the new location:
 
 ```php
   <?php
@@ -136,7 +134,7 @@ Below is a brief description of how each process is expected to work - for great
 
 ### Uploading new media items
 
-When uploading a new media item from the `Media Library` page within `WordPress`, the `handle_media_creation` function within the [python-actions.php](./php/python-actions.php) file is fired, triggering the `python_upload_file_to_s3_bucket` function within the [python-functions.php](./php/python-functions.php) file.
+When uploading a new media item from the `Media Library` page within `WordPress`, the `handle_media_creation` function within the [python-actions.php](./php/python/python-actions.php) file is fired, triggering the `python_upload_file_to_s3_bucket` function within the [python-functions.php](./php/python/python-functions.php) file.
 
 The `python_upload_file_to_s3_bucket` function takes four parameters: the `post_id` (the attachment id); the `update_type` (this is 'original' or 'edit' but for new media it is set to 'original'); a boolean flag `convert_to_webp` (optional: default = false); and the file_name (optional: default = null), that is only used if the `update_type` is set to 'edit'.
 
@@ -154,11 +152,11 @@ Finally, if the user refreshes the page an admin notification will appear at the
 
 Currently this is not active due the image not actually changing when the alt or description etc is changed within the `WordPress` attachment editing screen.
 
-This can be implemented by uncommenting the appropriate line under the `handle_media_update` function with the [python-actions.php](./php/python-actions.php) file.
+This can be implemented by uncommenting the appropriate line under the `handle_media_update` function with the [python-actions.php](./php/python/python-actions.php) file.
 
 ### Editing media items
 
-When editing a media item from the `Media Library` page within `WordPress`, the `handle_attachment_cropped_or_scaled` function within the [python-actions.php](./php/python-actions.php) file is fired, triggering the `python_upload_file_to_s3_bucket` function within the [python-functions.php](./php/python-functions.php) file.
+When editing a media item from the `Media Library` page within `WordPress`, the `handle_attachment_cropped_or_scaled` function within the [python-actions.php](./php/python/python-actions.php) file is fired, triggering the `python_upload_file_to_s3_bucket` function within the [python-functions.php](./php/python/python-functions.php) file.
 
 Details for this function can be viewed in the [upload new media items](#uploading-new-media-items) section, however the `update_type` is set to 'edit' and the `file_name` is passed to the function.
 
@@ -172,7 +170,7 @@ These tags have been added so that both the original and the edits files are sto
 
 Much like the upload function, this function shows the admin messages and logs data within the log files.
 
-When deleting a media item or items from the `Media Library` page within `WordPress`, the `handle_media_deletion` function with the [python-actions.php](./php/python-actions.php) file is fired, triggering the `python_delete_from_s3_bucket` function within the [python-functions.php](./php/python-functions.php) file.
+When deleting a media item or items from the `Media Library` page within `WordPress`, the `handle_media_deletion` function with the [python-actions.php](./php/python/python-actions.php) file is fired, triggering the `python_delete_from_s3_bucket` function within the [python-functions.php](./php/python/python-functions.php) file.
 
 Once this function is fired, it will connect to the `S3` client and delete all the files found under the following tags: `hyve_s3_url_edits`, `hyve_s3_url_original`, `hyve_s3_url_edits_webp`, and `hyve_s3_url_original_webp`.
 
