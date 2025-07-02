@@ -5,10 +5,9 @@ add_action('rest_api_init', function () {
   register_rest_route('hyve/v1', '/menus', [
     'methods' => 'POST',
     'callback' => 'hyve_get_menus',
-    'permission_callback' => '__return_true',
+    'permission_callback' => 'hyve_check_basic_auth',
   ]);
 });
-
 function hyve_get_menus(WP_REST_Request $request) {
   try {
     $cache_ttl_seconds = 600;
@@ -31,7 +30,7 @@ add_action('rest_api_init', function () {
   register_rest_route('hyve/v1', '/menus/by-type', [
     'methods' => 'POST',
     'callback' => 'hyve_get_menu',
-    'permission_callback' => '__return_true',
+    'permission_callback' => 'hyve_check_basic_auth',
   ]);
 });
 function hyve_get_menu(WP_REST_Request $request) {

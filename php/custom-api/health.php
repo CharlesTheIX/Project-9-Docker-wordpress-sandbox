@@ -5,7 +5,7 @@ add_action('rest_api_init', function () {
   register_rest_route('hyve/v1', '/health', [
     'methods' => 'GET',
     'callback' => 'hyve_health',
-    'permission_callback' => '__return_true',
+    'permission_callback' => 'hyve_check_basic_auth',
   ]);
 });
 

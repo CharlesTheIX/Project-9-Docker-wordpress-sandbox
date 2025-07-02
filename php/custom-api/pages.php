@@ -4,8 +4,8 @@ if (!defined('ABSPATH')) exit;
 add_action('rest_api_init', function () {
   register_rest_route('hyve/v1', '/pages', [
     'methods'             => 'POST',
-    'permission_callback' => '__return_true',
     'callback'            => 'hyve_get_pages',
+    'permission_callback' => 'hyve_check_basic_auth',
   ]);
 });
 function hyve_get_pages(WP_REST_Request $request) {
@@ -85,7 +85,7 @@ function hyve_get_pages(WP_REST_Request $request) {
 add_action('rest_api_init', function () {
   register_rest_route('hyve/v1', '/pages/by-slug-id', [
     'methods'             => 'POST',
-    'permission_callback' => '__return_true',
+    'permission_callback' => 'hyve_check_basic_auth',
     'callback'            => 'hyve_get_page_by_slug_id',
   ]);
 });
