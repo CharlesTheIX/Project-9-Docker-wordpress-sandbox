@@ -1,11 +1,56 @@
 {
 	"info": {
-		"_postman_id": "ff5c237f-ef44-46f3-b0d3-fc033d27c619",
+		"_postman_id": "8f004769-24e2-4f6d-b02a-3a8bd3407f1b",
 		"name": "Wordpress",
+		"description": "This is a Postman collection that relates to the custom api endpoints created within the Hyve headless Wordpress instance.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "39609913"
+		"_exporter_id": "39089531"
 	},
 	"item": [
+		{
+			"name": "Attachment By Slug or ID",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 13,\n    // \"slug\": \"pokemon-primape\",\n    \"fields\": []\n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/attachments/by-slug-id",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"{{namespace}}",
+						"{{version}}",
+						"attachments",
+						"by-slug-id"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Attachments",
 			"request": {
@@ -36,58 +81,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/attachments",
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/attachments",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"{{namespace}}",
-						"v1",
+						"{{version}}",
 						"attachments"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Attachments By Slug or ID",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "{{password}}",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "{{username}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\": 13,\n    // \"slug\": \"pokemon-primape\",\n    \"fields\": []\n}   ",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/attachments/by-slug-id",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"{{namespace}}",
-						"v1",
-						"attachments",
-						"by-slug-id"
 					]
 				}
 			},
@@ -114,14 +115,58 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/health",
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/health",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"{{namespace}}",
-						"v1",
+						"{{version}}",
 						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Menu By Type",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fields\": [\"url\"],\n    \"menu_type\": \"custom_menu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/menus/by-type",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"{{namespace}}",
+						"{{version}}",
+						"menus",
+						"by-type"
 					]
 				}
 			},
@@ -157,13 +202,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/menus",
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/menus",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"{{namespace}}",
-						"v1",
+						"{{version}}",
 						"menus"
 					]
 				}
@@ -171,7 +216,7 @@
 			"response": []
 		},
 		{
-			"name": "Menus By Type",
+			"name": "Page By Slug or ID",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -192,7 +237,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"fields\": [\"url\"],\n    \"menu_type\": \"custom_menu\"\n}",
+					"raw": "{\n    \"id\": 2,\n    // \"slug\": \"sample-page\",\n    \"fields\": []\n}   ",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -200,15 +245,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/menus/by-type",
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/pages/by-slug-id",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"{{namespace}}",
-						"v1",
-						"menus",
-						"by-type"
+						"{{version}}",
+						"pages",
+						"by-slug-id"
 					]
 				}
 			},
@@ -244,13 +289,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/pages",
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/pages",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"{{namespace}}",
-						"v1",
+						"{{version}}",
 						"pages"
 					]
 				}
@@ -258,7 +303,7 @@
 			"response": []
 		},
 		{
-			"name": "Pages By Slug or ID",
+			"name": "Post By Slug or ID",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -279,7 +324,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 2,\n    // \"slug\": \"sample-page\",\n    \"fields\": []\n}   ",
+					"raw": "{\n    \"id\": 10,\n    // \"slug\": \"my-post\",\n    \"fields\": [],\n    \"post_type\": \"case\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -287,14 +332,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/pages/by-slug-id",
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/posts/by-slug-id",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"{{namespace}}",
-						"v1",
-						"pages",
+						"{{version}}",
+						"posts",
 						"by-slug-id"
 					]
 				}
@@ -331,14 +376,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/post-types",
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/posts/types",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"{{namespace}}",
-						"v1",
-						"post-types"
+						"{{version}}",
+						"posts",
+						"types"
 					]
 				}
 			},
@@ -374,58 +420,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/posts",
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/posts",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"{{namespace}}",
-						"v1",
+						"{{version}}",
 						"posts"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Posts By Slug or ID",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "{{password}}",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "{{username}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\": 10,\n    // \"slug\": \"my-post\",\n    \"fields\": [],\n    \"post_type\": \"case\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/posts/by-slug-id",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"{{namespace}}",
-						"v1",
-						"posts",
-						"by-slug-id"
 					]
 				}
 			},
@@ -461,13 +463,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/taxonomies",
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/taxonomies",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"{{namespace}}",
-						"v1",
+						"{{version}}",
 						"taxonomies"
 					]
 				}
@@ -475,7 +477,7 @@
 			"response": []
 		},
 		{
-			"name": "Taxonomies By Slug or ID",
+			"name": "Taxonomy By Slug or ID",
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -504,13 +506,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/taxonomies/by-slug-id",
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/taxonomies/by-slug-id",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"{{namespace}}",
-						"v1",
+						"{{version}}",
 						"taxonomies",
 						"by-slug-id"
 					]
@@ -548,18 +550,83 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/{{namespace}}/v1/taxonomy-types",
+					"raw": "{{base_url}}/{{namespace}}/{{version}}/taxonomies/types",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"{{namespace}}",
-						"v1",
-						"taxonomy-types"
+						"{{version}}",
+						"taxonomies",
+						"types"
 					]
 				}
 			},
 			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5022/?rest_route=",
+			"type": "string"
+		},
+		{
+			"key": "username",
+			"value": "admin",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "root",
+			"type": "string"
+		},
+		{
+			"key": "namespace",
+			"value": "hyve",
+			"type": "string"
+		},
+		{
+			"key": "version",
+			"value": "v1",
+			"type": "string"
 		}
 	]
 }

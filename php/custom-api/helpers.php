@@ -1,4 +1,6 @@
 <?php
+if (!defined('ABSPATH')) exit;
+
 if (!defined('CUSTOM_API_NAMESPACE')) define('CUSTOM_API_NAMESPACE', 'hyve');
 
 function api_response($error, $status, $message, $data = null, $meta = null) {

@@ -146,7 +146,7 @@ function hyve_get_post_by_slug_id(WP_REST_Request $request) {
 }
 
 add_action('rest_api_init', function () {
-  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/post-types', [
+  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/posts/types', [
     'methods'             => 'POST',
     'callback'            => 'hyve_get_post_types',
     'permission_callback' => 'hyve_check_basic_auth',

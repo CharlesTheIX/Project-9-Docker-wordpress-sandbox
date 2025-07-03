@@ -122,7 +122,7 @@ function hyve_get_taxonomy_by_slug_id(WP_REST_Request $request) {
 }
 
 add_action('rest_api_init', function () {
-  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/taxonomy-types', [
+  register_rest_route(CUSTOM_API_NAMESPACE . '/v1', '/taxonomies/types', [
     'methods'             => 'POST',
     'permission_callback' => 'hyve_check_basic_auth',
     'callback'            => 'hyve_get_taxonomy_types',
