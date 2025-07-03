@@ -3,6 +3,7 @@
 - [Notes](#✅-notes)
 - [Introduction](#📘-introduction)
 - [Integration](#🧩-integration)
+- [Authentication](#🔐-authentication)
 - [Endpoints](#🌐-endpoints)
   - [Health](#health)
   - [Pages](#pages)
@@ -81,11 +82,37 @@ With in your themes `functions.php` file, insert the following code into an appr
   }
 ```
 
+Additionally there is a global variable set in the [helpers.php](./helpers.php) file called `CUSTOM_API_NAMESPACE`, this is currently set to `hyve` but can be changed to edit the desired endpoint base url.
+
+## 🔐 Authentication
+
+Basic authentication (username and password) has been set for each of the routes, including the health route (so the auth can be tested also easily).
+
+This auth has to be added to the Headers of the request from the NextJS application:
+
+```typescript
+  //... start of the function
+
+  const authHeader = `Basic ${Buffer.from(`${username}:${password}`).toString('base64')}`;
+  const response = await fetch (ENDPOINT, {
+    method: 'POST',
+    headers: {
+      // ... other headers
+      Authorization: authHeader,
+    }
+    body: JSON.stringify({ /* ... data */})
+  }).then((res: any) => { return res.json(); });
+
+  // ... rest of the function
+```
+
 ## 🌐 Endpoints
 
 The section contains a list of the endpoints available within this custom Wordpress api setup.
 
 **Be aware** that the posts endpoints can be used for any post types, including pages and attachments (Wordpress considers most, if not all, data types as posts), however they have been separated out due to the different use cases / requirements of page and attachment data when bing fetched.
+
+All endpoints have been set up to use the native Wordpress caching functionality. The data cached is always pre field filtering so the cache can be used for multiple calls but with different field filter parameters.
 
 All endpoints are set up to return the response below - this has been done so that the expected responses can be consistent throughout.
 
